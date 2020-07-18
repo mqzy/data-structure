@@ -6,21 +6,21 @@ public class ArrayQueue {
     private int rear;//队列尾
     private int[] arr;
 
-    public ArrayQueue(int maxSize){
+    private ArrayQueue(int maxSize){
         this.maxSize = maxSize;
         arr = new int[maxSize];
         front = -1;//指向队列头的前一个位置
         rear = -1;//指向队列尾
     }
-    public boolean isFull(){
+    private boolean isFull(){
         return rear == maxSize-1;
     }
 
-    public boolean isEmpty(){
+    private boolean isEmpty(){
         return front == rear;
     }
 
-    public void  addQueue(int data){
+    private void  addQueue(int data){
         if (isFull()){
             System.out.println("队列已满");
             return;
@@ -29,7 +29,7 @@ public class ArrayQueue {
         arr[rear] = data;
     }
 
-    public int getQueue(){
+    private int getQueue(){
         if (isEmpty()){
             throw new RuntimeException("队列已空");
         }
@@ -37,7 +37,7 @@ public class ArrayQueue {
         return arr[front];
     }
 
-    public void showQueue(){
+    private void showQueue(){
         if (isEmpty()){
             System.out.println("队列为空");
             return;
@@ -49,7 +49,7 @@ public class ArrayQueue {
 
     public static void main(String[] args) {
         ArrayQueue AQ = new ArrayQueue(3);
-        char key = ' ';
+        char key;
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
         while (loop){
