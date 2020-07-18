@@ -6,22 +6,22 @@ public class CircleArrayQueue {
     private int front;//队列头
     private int rear;//队列尾
 
-    public CircleArrayQueue(int maxSixe) {
+    private CircleArrayQueue(int maxSixe) {
         this.maxSize = maxSixe;
         arr = new int[maxSixe];
         front = 0;//指向队列第一个元素
         rear = 0;//指向队列最后一个元素的后一个位置
     }
 
-    public boolean isFull(){
+    private boolean isFull(){
         return (rear+1)%maxSize == front;
     }
 
-    public boolean isEmpty(){
+    private boolean isEmpty(){
         return rear == front;
     }
 
-    public void addQueue(int data){
+    private void addQueue(int data){
         if (isFull()){
             System.out.println("队列已满");
             return;
@@ -29,7 +29,7 @@ public class CircleArrayQueue {
         arr[rear] = data;
         rear = (rear+1)%maxSize;
     }
-    public int getQueue(){
+    private int getQueue(){
         if (isEmpty()){
             throw new RuntimeException("队列已空");
         }
@@ -38,7 +38,7 @@ public class CircleArrayQueue {
         return value;
     }
 
-    public void showQueue(){
+    private void showQueue(){
         if (isEmpty()){
             System.out.println("队列为空");
             return;
@@ -48,14 +48,13 @@ public class CircleArrayQueue {
         }
     }
 
-    public int size(){
-        int size = (rear-front+maxSize)%maxSize;
-        return size;
+    private int size(){
+        return (rear-front+maxSize)%maxSize;
     }
 
     public static void main(String[] args) {
         CircleArrayQueue CAQ = new CircleArrayQueue(3);
-        char key = ' ';
+        char key;
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
         while (loop){
