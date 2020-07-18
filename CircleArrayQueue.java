@@ -1,40 +1,41 @@
 import java.util.Scanner;
 
-public class ArrayQueue {
+public class CircleArrayQueue {
+    private int[] arr;
     private int maxSize;
     private int front;//队列头
     private int rear;//队列尾
-    private int[] arr;
 
-    public ArrayQueue(int maxSize){
-        this.maxSize = maxSize;
-        arr = new int[maxSize];
-        front = -1;//指向队列头的前一个位置
-        rear = -1;//指向队列尾
+    public CircleArrayQueue(int maxSixe) {
+        this.maxSize = maxSixe;
+        arr = new int[maxSixe];
+        front = 0;//指向队列第一个元素
+        rear = 0;//指向队列最后一个元素的后一个位置
     }
+
     public boolean isFull(){
-        return rear == maxSize-1;
+        return (rear+1)%maxSize == front;
     }
 
     public boolean isEmpty(){
-        return front == rear;
+        return rear == front;
     }
 
-    public void  addQueue(int data){
+    public void addQueue(int data){
         if (isFull()){
             System.out.println("队列已满");
             return;
         }
-        rear++;
         arr[rear] = data;
+        rear = (rear+1)%maxSize;
     }
-
     public int getQueue(){
         if (isEmpty()){
             throw new RuntimeException("队列已空");
         }
-        front++;
-        return arr[front];
+        int value = arr[front];
+        front = (front+1)%maxSize;
+        return value;
     }
 
     public void showQueue(){
@@ -42,13 +43,18 @@ public class ArrayQueue {
             System.out.println("队列为空");
             return;
         }
-        for (int i = 0; i < maxSize; i++) {
-            System.out.println("arr["+i+"]: "+arr[i]);
+        for (int i = front;i < front+size();i++) {
+            System.out.println("arr["+i%maxSize+"]: "+arr[i%maxSize]);
         }
     }
 
+    public int size(){
+        int size = (rear-front+maxSize)%maxSize;
+        return size;
+    }
+
     public static void main(String[] args) {
-        ArrayQueue AQ = new ArrayQueue(3);
+        CircleArrayQueue CAQ = new CircleArrayQueue(3);
         char key = ' ';
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -60,7 +66,7 @@ public class ArrayQueue {
             key = scanner.next().charAt(0);
             switch (key){
                 case 's':
-                    AQ.showQueue();
+                    CAQ.showQueue();
                     break;
                 case 'e':
                     scanner.close();
@@ -69,11 +75,11 @@ public class ArrayQueue {
                 case 'a':
                     System.out.println("请输入一个数：");
                     int value = scanner.nextInt();
-                    AQ.addQueue(value);
+                    CAQ.addQueue(value);
                     break;
                 case 'g':
                     try {
-                        int res = AQ.getQueue();
+                        int res = CAQ.getQueue();
                         System.out.println("取出的数据是："+res);
                     }catch (Exception e){
                         System.out.println(e.getMessage());
@@ -83,4 +89,3 @@ public class ArrayQueue {
         }
     }
 }
-
