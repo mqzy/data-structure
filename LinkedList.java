@@ -30,9 +30,9 @@ public class LinkedList {
             temp.setNext(heroNode);
     }
 
-    private void update(HeroNode heroNode){
+    private void update(HeroNode heroNode){//更新链表
         if (head.getNext() == null){
-            System.out.println("链表为空");
+            System.out.println("链表为空~update");
             return;
         }
         HeroNode temp = head.getNext();
@@ -52,9 +52,9 @@ public class LinkedList {
             System.out.println("没有找到这个节点");
     }
 
-    private void delete(int no){
+    private void delete(int no){//删除链表
         if (head.getNext() == null){
-            System.out.println("链表为空");
+            System.out.println("链表为空~delete");
             return;
         }
         HeroNode temp = head;
@@ -73,9 +73,49 @@ public class LinkedList {
             System.out.println("没有找到这个节点");
     }
 
+    private int length(){//获取单链表节点的个数，不计算头结点
+        int len = 0;
+        HeroNode next = head;
+        while (next.getNext() != null){
+            len++;
+            next = next.getNext();
+        }
+        return len;
+    }
+
+    private HeroNode findLastIndexNode(int index){//找到倒数第index个节点
+        int size = this.length();
+        if (index <= 0 || index > size){
+            return null;
+        }
+        HeroNode temp = head.getNext();
+        for (int i = 0; i < size-index; i++) {
+            temp = temp.getNext();
+        }
+        return temp;
+    }
+
+    private void reverseNode(){
+        if (head.getNext() == null || head.getNext().getNext() == null)//链表为空或者只有一个数据
+            return;
+        int size = this.length();
+        HeroNode[] heroNodes = new HeroNode[size];
+        HeroNode temp1 = head.getNext();
+        for (int i = 0; i < size; i++) {
+            heroNodes[i] = temp1;
+            temp1 = temp1.getNext();
+            heroNodes[i].setNext(null);
+        }
+        HeroNode temp2 = head;
+        for (int i = size-1; i >= 0; i--) {
+            temp2.setNext(heroNodes[i]);
+            temp2 = temp2.getNext();
+        }
+    }
+
     private void list(){
         if (head.getNext() == null){
-            System.out.println("链表为空");
+            System.out.println("链表为空~list");
             return;
         }
         HeroNode temp = head.getNext();
@@ -100,12 +140,16 @@ public class LinkedList {
         linkedList.add(hero6);
         linkedList.addByNo(hero4);
         linkedList.list();
+//        System.out.println(linkedList.length());
 //        HeroNode heroNode = new HeroNode(2,"xxx", "玉麒麟");
 //        linkedList.update(heroNode);
 //        linkedList.list();
 //        linkedList.delete(1);
 ////        linkedList.list();
-        linkedList.delete(8);
+//        linkedList.delete(8);
+//        linkedList.list();
+//        System.out.println(linkedList.findLastIndexNode(4));
+        linkedList.reverseNode();
         linkedList.list();
     }
 }
