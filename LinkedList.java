@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class LinkedList {
     //初始化头结点，头结点不要动,不存放具体数据
     private HeroNode head = new HeroNode(0,"","");
@@ -113,6 +115,10 @@ public class LinkedList {
         }
     }
 
+    private void mergeNode(HeroNode heroNode){
+
+    }
+
     private void list(){
         if (head.getNext() == null){
             System.out.println("链表为空~list");
@@ -125,6 +131,22 @@ public class LinkedList {
             temp = temp.getNext();
         }
     }
+
+    private void revlist(){//反转输出链表
+        if (head.getNext() == null){
+            System.out.println("链表为空~revlist");
+            return;
+        }
+        Stack<HeroNode> stack= new Stack<>();
+        HeroNode temp = head.getNext();
+        while (temp != null){
+            stack.push(temp);
+            temp = temp.getNext();
+        }
+        while (stack.size() > 0)
+            System.out.println(stack.pop());
+    }
+
     public static void main(String[] args) {
         HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
         HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
@@ -149,8 +171,9 @@ public class LinkedList {
 //        linkedList.delete(8);
 //        linkedList.list();
 //        System.out.println(linkedList.findLastIndexNode(4));
-        linkedList.reverseNode();
-        linkedList.list();
+//        linkedList.reverseNode();
+//        linkedList.list();
+        linkedList.revlist();
     }
 }
 
