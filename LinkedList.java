@@ -4,6 +4,10 @@ public class LinkedList {
     //初始化头结点，头结点不要动,不存放具体数据
     private HeroNode head = new HeroNode(0,"","");
 
+    private HeroNode getHead() {
+        return head;
+    }
+
     private void add(HeroNode heroNode){
         HeroNode temp = head;
         while (temp.getNext() != null) {
@@ -14,17 +18,20 @@ public class LinkedList {
 
     private void addByNo(HeroNode heroNode){//按no大小顺序插入
         HeroNode temp = head;
+        int no = heroNode.getNo();
+        boolean flag = false;//判断插入在最后
         while (temp.getNext() != null) {
             temp = temp.getNext();
-            if (temp.getNo() == heroNode.getNo()){
-                System.out.println("已有英雄，添加失败");
+            if (temp.getNo() == no){
+                System.out.println("已有英雄:"+no+"，添加失败");
                 return;
             }
-            if (temp.getNext().getNo() > heroNode.getNo()){
+            if (temp.getNext() != null && temp.getNext().getNo() > no){
+                flag = true;//不插在最后
                 break;
             }
         }
-        if (temp.getNext() != null) {
+        if (flag) {
             HeroNode next = temp.getNext();
             temp.setNext(heroNode);
             temp.getNext().setNext(next);
@@ -115,8 +122,38 @@ public class LinkedList {
         }
     }
 
-    private void mergeNode(HeroNode heroNode){
+    private void mergeNode(LinkedList linkedList){
+        //linkedlist2被破坏
+//        int size = linkedList.length();
+//        HeroNode[] heroNodes = new HeroNode[size];
+//        HeroNode temp = linkedList.getHead().getNext();
+//        for (int i = 0; i < size; i++) {
+//            heroNodes[i] = temp;
+//            temp = temp.getNext();
+//            heroNodes[i].setNext(null);
+//        }
+//        for (int i = 0; i < size; i++) {
+//            this.addByNo(heroNodes[i]);
+//        }
+        //linkedlist2被破坏
+//        HeroNode temp = linkedList.getHead().getNext();
+//        while (temp != null){
+//            HeroNode node = temp;
+//            temp = temp.getNext();
+//            this.addByNo(node);
+////            temp = temp.getNext();
+//        }
+        //linkedlist2保持原样
+        HeroNode temp = linkedList.getHead().getNext();
+        while (temp != null){
+            HeroNode node = clone(temp);
+            this.addByNo(node);
+            temp = temp.getNext();
+        }
+    }
 
+    private HeroNode clone(HeroNode heroNode){
+        return new HeroNode(heroNode.getNo(),heroNode.getName(),heroNode.getNickname());
     }
 
     private void list(){
@@ -151,29 +188,37 @@ public class LinkedList {
         HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
         HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
         HeroNode hero3 = new HeroNode(3, "吴用", "智多星");
-        HeroNode hero4 = new HeroNode(5, "关胜", "大刀");
-        HeroNode hero5 = new HeroNode(7, "秦明", "霹雳火");
-        HeroNode hero6 = new HeroNode(8, "呼延灼", "双鞭");
-        LinkedList linkedList = new LinkedList();
-        linkedList.add(hero1);
-        linkedList.add(hero2);
-        linkedList.add(hero3);
-        linkedList.add(hero5);
-        linkedList.add(hero6);
-        linkedList.addByNo(hero4);
-        linkedList.list();
-//        System.out.println(linkedList.length());
+        HeroNode hero4 = new HeroNode(4, "公孙胜", "入云龙");
+        HeroNode hero5 = new HeroNode(5, "关胜", "大刀");
+        HeroNode hero6 = new HeroNode(6, "林冲", "豹子头");
+        HeroNode hero7 = new HeroNode(7, "秦明", "霹雳火");
+        HeroNode hero8 = new HeroNode(8, "呼延灼", "双鞭");
+        LinkedList linkedList1 = new LinkedList();
+        LinkedList linkedList2 = new LinkedList();
+        linkedList1.add(hero1);
+        linkedList1.add(hero3);
+        linkedList1.add(hero5);
+        linkedList1.add(hero7);
+        linkedList2.add(hero2);
+        linkedList2.add(hero4);
+        linkedList2.add(hero6);
+        linkedList2.add(hero8);
+        linkedList1.mergeNode(linkedList2);
+        linkedList1.list();
+        System.out.println();
+        linkedList2.list();
+//        System.out.println(linkedList1.length());
 //        HeroNode heroNode = new HeroNode(2,"xxx", "玉麒麟");
-//        linkedList.update(heroNode);
-//        linkedList.list();
-//        linkedList.delete(1);
-////        linkedList.list();
-//        linkedList.delete(8);
-//        linkedList.list();
-//        System.out.println(linkedList.findLastIndexNode(4));
-//        linkedList.reverseNode();
-//        linkedList.list();
-        linkedList.revlist();
+//        linkedList1.update(heroNode);
+//        linkedList1.list();
+//        linkedList1.delete(1);
+//        linkedList1.list();
+//        linkedList1.delete(8);
+//        linkedList1.list();
+//        System.out.println(linkedList1.findLastIndexNode(4));
+//        linkedList1.reverseNode();
+//        linkedList1.list();
+//        linkedList1.revlist();
     }
 }
 
@@ -226,4 +271,14 @@ class HeroNode{
                 ", nickname='" + nickname + '\'' +
                 "}";
     }
+
+//    @Override
+//    public String toString() {
+//        return "HeroNode{" +
+//                "no=" + no +
+//                ", name='" + name + '\'' +
+//                ", nickname='" + nickname + '\'' +
+//                ", next=" + next +
+//                '}';
+//    }
 }
