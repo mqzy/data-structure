@@ -21,6 +21,32 @@ public class DoubleLinkedList {
         heronode.setPre(temp);
     }
 
+    private void addByNo(HeroNode2 heroNode){
+        HeroNode2 temp = head;
+        int no = heroNode.getNo();
+        boolean flag = false;
+        while (temp.getNext() != null){
+            temp = temp.getNext();
+            if (temp.getNo() == no){
+                System.out.println("已有英雄:"+no+"，添加失败");
+                return;
+            }
+            if (temp.getNext() != null && temp.getNext().getNo() > no){
+                flag = true;
+                break;
+            }
+        }
+        if (flag){
+            heroNode.setNext(temp.getNext());
+            heroNode.setPre(temp);
+            temp.getNext().setPre(heroNode);
+            temp.setNext(heroNode);
+        }else{
+            temp.setNext(heroNode);
+            heroNode.setPre(temp);
+        }
+    }
+
     private void update(HeroNode2 heronode){
         if (head.getNext() == null){
             System.out.println("链表为空~update");
@@ -53,7 +79,8 @@ public class DoubleLinkedList {
         while (temp != null){
             if (temp.getNo() == no){
                 temp.getPre().setNext(temp.getNext());
-                temp.getNext().setPre(temp.getPre());
+                if (temp.getNext() != null)
+                    temp.getNext().setPre(temp.getPre());
                 flag = true;
                 break;
             }
@@ -79,12 +106,19 @@ public class DoubleLinkedList {
         linkedList1.add(hero3);
         linkedList1.add(hero5);
         linkedList1.add(hero7);
+//        linkedList1.addByNo(hero4);
+//        linkedList1.addByNo(hero8);
         linkedList2.add(hero2);
         linkedList2.add(hero4);
         linkedList2.add(hero6);
         linkedList2.add(hero8);
+//        linkedList1.delete(1);
+//        linkedList1.delete(7);
+//        HeroNode2 heroNode2 = new HeroNode2(7,"xx","xx");
+//        linkedList1.update(heroNode2);
+//        linkedList1.delete(7);
         linkedList1.show();
-        linkedList2.show();
+//        linkedList2.show();
     }
 }
 
