@@ -1,3 +1,5 @@
+package linkedlist;
+
 import java.util.Stack;
 
 public class LinkedList {
@@ -125,8 +127,8 @@ public class LinkedList {
     private void mergeNode(LinkedList linkedList){
         //linkedlist2被破坏
 //        int size = linkedList.length();
-//        HeroNode[] heroNodes = new HeroNode[size];
-//        HeroNode temp = linkedList.getHead().getNext();
+//        linkedlist.HeroNode[] heroNodes = new linkedlist.HeroNode[size];
+//        linkedlist.HeroNode temp = linkedList.getHead().getNext();
 //        for (int i = 0; i < size; i++) {
 //            heroNodes[i] = temp;
 //            temp = temp.getNext();
@@ -136,9 +138,9 @@ public class LinkedList {
 //            this.addByNo(heroNodes[i]);
 //        }
         //linkedlist2被破坏
-//        HeroNode temp = linkedList.getHead().getNext();
+//        linkedlist.HeroNode temp = linkedList.getHead().getNext();
 //        while (temp != null){
-//            HeroNode node = temp;
+//            linkedlist.HeroNode node = temp;
 //            temp = temp.getNext();
 //            this.addByNo(node);
 ////            temp = temp.getNext();
@@ -208,7 +210,7 @@ public class LinkedList {
         System.out.println();
         linkedList2.list();
 //        System.out.println(linkedList1.length());
-//        HeroNode heroNode = new HeroNode(2,"xxx", "玉麒麟");
+//        linkedlist.HeroNode heroNode = new linkedlist.HeroNode(2,"xxx", "玉麒麟");
 //        linkedList1.update(heroNode);
 //        linkedList1.list();
 //        linkedList1.delete(1);
@@ -265,7 +267,7 @@ class HeroNode{
 
     @Override
     public String toString() {
-        return "HeroNode{" +
+        return "linkedlist.HeroNode{" +
                 "no=" + no +
                 ", name='" + name + '\'' +
                 ", nickname='" + nickname + '\'' +
@@ -274,7 +276,7 @@ class HeroNode{
 
 //    @Override
 //    public String toString() {
-//        return "HeroNode{" +
+//        return "linkedlist.HeroNode{" +
 //                "no=" + no +
 //                ", name='" + name + '\'' +
 //                ", nickname='" + nickname + '\'' +
