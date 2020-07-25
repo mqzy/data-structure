@@ -1,3 +1,5 @@
+package linkedlist;
+
 public class DoubleLinkedList {
     private HeroNode2 head = new HeroNode2(0,"","");
 
@@ -114,7 +116,7 @@ public class DoubleLinkedList {
         linkedList2.add(hero8);
 //        linkedList1.delete(1);
 //        linkedList1.delete(7);
-//        HeroNode2 heroNode2 = new HeroNode2(7,"xx","xx");
+//        linkedlist.HeroNode2 heroNode2 = new linkedlist.HeroNode2(7,"xx","xx");
 //        linkedList1.update(heroNode2);
 //        linkedList1.delete(7);
         linkedList1.show();
