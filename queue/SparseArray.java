@@ -1,3 +1,5 @@
+package queue;
+
 public class SparseArray {
     private static int[][] OriArray = new int[11][11];
 
@@ -15,7 +17,7 @@ public class SparseArray {
             System.out.println();
         }
     }
-    static int[][] to_Spa(int [][]arr){
+    private static int[][] to_Spa(int[][] arr){
         int sum = 0;
         for (int[] row:arr) {
             for (int data:row) {
