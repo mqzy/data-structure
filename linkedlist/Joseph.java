@@ -80,8 +80,13 @@ public class Joseph {
         }
     }
 
-    private void out(int k,int m){
+    private void out(int n,int k,int m){
+        this.addBoy(n);
         emptyReport("out");
+        if (k > n){
+            System.out.println("没有编号为"+k+"的节点");
+            return;
+        }
         int len1  = this.length();
         int len2 = len1;
         int[] arr = new int[len1];
@@ -121,13 +126,12 @@ public class Joseph {
         Joseph joseph = new Joseph();
         System.out.println("输入人的数量N：");
         Scanner scanner = new Scanner(System.in);
-        int num = scanner.nextInt();
+        int n = scanner.nextInt();
         System.out.println("输入k:");
         int k = scanner.nextInt();
         System.out.println("输入m");
         int m = scanner.nextInt();
-        joseph.addBoy(num);
-        joseph.out(k,m);
+        joseph.out(n,k,m);
 //        joseph.show();
     }
 }
