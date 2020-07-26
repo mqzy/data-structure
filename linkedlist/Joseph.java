@@ -80,7 +80,7 @@ public class Joseph {
         }
     }
 
-    private void out1(int n,int k,int m){
+    private void out1(int n,int k,int m){//比较复杂
         this.addBoy(n);
         emptyReport("out1");
         if (k > n){
@@ -115,7 +115,7 @@ public class Joseph {
         }
     }
 
-    private void out2(int n,int k,int m){
+    private void out2(int n,int k,int m){//比较简单
         this.addBoy(n);
         emptyReport("out1");
         if (k > n){
@@ -124,23 +124,23 @@ public class Joseph {
         }
         Boy temp = first;
         for (int i = 0; i < this.length()-1; i++) {
-            temp = temp.getNext();
+            temp = temp.getNext();//使辅助节点temp指向first的后一个节点，方便删除
         }
         for (int i = 0; i < k-1; i++) {
             first = first.getNext();
             temp = temp.getNext();
         }
         while (true){
-            if (temp == first){
+            if (temp == first){//只剩一个节点，直接出圈
                 System.out.println(temp.getNo());
                 break;
             }
-            for (int i = 0; i < m-1; i++) {
+            for (int i = 0; i < m-1; i++) {//找到要出圈的节点
                 first = first.getNext();
                 temp = temp.getNext();
             }
             System.out.println(first.getNo());
-            first = first.getNext();
+            first = first.getNext();//出圈操作
             temp.setNext(first);
         }
     }
