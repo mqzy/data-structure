@@ -80,9 +80,9 @@ public class Joseph {
         }
     }
 
-    private void out(int n,int k,int m){
+    private void out1(int n,int k,int m){
         this.addBoy(n);
-        emptyReport("out");
+        emptyReport("out1");
         if (k > n){
             System.out.println("没有编号为"+k+"的节点");
             return;
@@ -90,14 +90,8 @@ public class Joseph {
         int len1  = this.length();
         int len2 = len1;
         int[] arr = new int[len1];
-        int count = 0;
         Boy temp = first;
-        while (true){//找到开始计数的那个节点
-            count++;
-            if (count == k){
-                count = 0;
-                break;
-            }
+        for (int i = 0; i < k-1; i++) {//找到开始计数的那个节点
             temp = temp.getNext();
         }
         System.out.println("开始节点:"+temp.getNo());
@@ -108,17 +102,46 @@ public class Joseph {
                 this.delete(no);
                 break;
             }
-            count++;
-            if (count == m){//找到要出圈的节点
-                count = 0;
-                arr[len2-len1] = temp.getNo();//将出圈的节点的值赋给数组
-                this.delete(temp.getNo());
-                len1--;
+            for (int i = 0; i < m-1; i++) {//找到要出圈的节点
+                temp = temp.getNext();
             }
-            temp = temp.getNext();
+            arr[len2-len1] = temp.getNo();//将出圈的节点的值赋给数组
+            this.delete(temp.getNo());
+            temp = temp.getNext();//temp赋值下一个开始计数节点
+            len1--;
         }
         for (int i = 0; i < len2; i++) {
             System.out.println(arr[i]);
+        }
+    }
+
+    private void out2(int n,int k,int m){
+        this.addBoy(n);
+        emptyReport("out1");
+        if (k > n){
+            System.out.println("没有编号为"+k+"的节点");
+            return;
+        }
+        Boy temp = first;
+        for (int i = 0; i < this.length()-1; i++) {
+            temp = temp.getNext();
+        }
+        for (int i = 0; i < k-1; i++) {
+            first = first.getNext();
+            temp = temp.getNext();
+        }
+        while (true){
+            if (temp == first){
+                System.out.println(temp.getNo());
+                break;
+            }
+            for (int i = 0; i < m-1; i++) {
+                first = first.getNext();
+                temp = temp.getNext();
+            }
+            System.out.println(first.getNo());
+            first = first.getNext();
+            temp.setNext(first);
         }
     }
 
@@ -131,7 +154,7 @@ public class Joseph {
         int k = scanner.nextInt();
         System.out.println("输入m");
         int m = scanner.nextInt();
-        joseph.out(n,k,m);
+        joseph.out2(n,k,m);
 //        joseph.show();
     }
 }
