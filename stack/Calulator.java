@@ -59,8 +59,7 @@ public class Calulator {
                     if (calulator.operaStack.empty()) {
                         flag = false;
                     } else {
-                        char pre = calulator.operaStack.pop();
-                        calulator.operaStack.push(pre);
+                        char pre = calulator.operaStack.peek();
                         if ((n == '*' || n == '/') && (pre == '+' || pre == '-')) {
                             flag = false;
                         } else {
