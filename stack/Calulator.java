@@ -52,24 +52,23 @@ public class Calulator {
                 num = calulator.toNum(num,n);
             }else {
                 calulator.numStack.push(num);
-                System.out.println("numStack入栈："+num);
+                System.out.println("numStack入栈：" + num);
                 num = 0;
                 boolean flag = true;
                 while (flag) {
-                    if (calulator.operaStack.empty()) {
-                        flag = false;
-                    } else {
+                    if (!calulator.operaStack.empty()) {
                         char pre = calulator.operaStack.peek();
-                        if ((n == '*' || n == '/') && (pre == '+' || pre == '-')) {
-                            flag = false;
-                        } else {
+                        if (!((n == '*' || n == '/') && (pre == '+' || pre == '-')))
                             calulator.calculate();
-                        }
+                        else
+                            flag = false;
                     }
-                    }
-                calulator.operaStack.push(n);
-                System.out.println("operaStack入栈：" + n);
-                    }
+                    else
+                        flag = false;
+                }
+                    calulator.operaStack.push(n);
+                    System.out.println("operaStack入栈：" + n);
+            }
             index++;
             if (index < len)
                 n = expression.charAt(index);
